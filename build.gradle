@@ -1,0 +1,25 @@
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'maven'
+
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.11.0'
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-server', version: '3.11.0'
+    compile group: 'org.testng', name: 'testng', version: '6.14.3'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.0'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.11.0'
+}
+
+test {
+    useTestNG {
+        suites 'src/test/resources/testNG.xml'
+    }
+}

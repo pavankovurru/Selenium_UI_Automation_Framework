@@ -1,0 +1,26 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="TEST SUITE">
+
+    <!--SUITE LEVEL PARAMETERS-->
+
+    <parameter name="url" value="https://www.google.com"/>
+    <parameter name="browser" value="firefox"/>
+    <parameter name="browserVersion" value="latest"/>
+    <parameter name="targetRun" value="local"/>
+
+    <!--runOn options : local or browserstack-->
+
+    <listeners>
+        <listener class-name="com.company.project.utilities.ReRunFailedTestsListener"/>
+        <listener class-name="com.company.project.utilities.TestCountResetterAfterReRun"/>
+        <listener class-name="com.company.project.utilities.TestListener"/>
+    </listeners>
+
+    <test name="UI Tests"  >
+        <classes>
+            <class name="com.company.project.LoginTest" />
+        </classes>
+    </test>
+
+</suite>
