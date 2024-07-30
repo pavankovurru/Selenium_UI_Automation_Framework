@@ -1,8 +1,6 @@
 package com.company.project;
 
-import com.company.project.constants.global.GlobalConstants;
 import com.company.project.pages.global.LoginPage;
-import com.company.project.utilities.PropertiesLoader;
 import com.company.project.utilities.SeleniumUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -44,8 +42,6 @@ public class LoginTest {
   @Test(priority = 1)
   public void validateLogin() {
    lp.logIn();
-   seleniumUtil.sleep(5);
-
   }
 
   @AfterMethod

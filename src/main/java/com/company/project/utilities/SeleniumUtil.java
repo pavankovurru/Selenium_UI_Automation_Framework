@@ -1,25 +1,21 @@
 package com.company.project.utilities;
 
-import com.company.project.constants.global.GlobalConstants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.edge.EdgeDriverService;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.LocalFileDetector;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
+import org.openqa.selenium.safari.SafariOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -30,6 +26,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.Date;
 import java.util.List;
 
@@ -50,7 +47,8 @@ public class SeleniumUtil {
 
     public WebDriver createBrowserStackDriver(String url, String browser, String browserVersion) {
 
-        final String USERNAME = "USERNAME"; // TODO Update browser stack account user name & key
+        // TODO Update browser stack account user name & key, check for any recent changes
+        final String USERNAME = "USERNAME";
         final String AUTOMATE_KEY = "BrowserStackKey";
         final String URL =
                 "https://" + USERNAME + ":" + AUTOMATE_KEY + "@hub-cloud.browserstack.com/wd/hub";
@@ -110,82 +108,53 @@ public class SeleniumUtil {
 
         // Initialize driver object to FIREFOX BROWSER
         if (browser.equalsIgnoreCase("FIREFOX")) {
-            System.setProperty("webdriver.gecko.driver", GlobalConstants.MAC_FIREFOX_GECKO_DRIVER_PATH);
-            System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE, "null");  // Disabling firefox logs
+            //Firefox Options
+            FirefoxOptions firefoxOptions = new FirefoxOptions();
 
-            //Firefox Options and profile
-            FirefoxOptions options = new FirefoxOptions();
-            options.setProfile(firefoxProfile());
-            driver = new FirefoxDriver(options);
-
+            //Firefox driver - Firefox driver path is not required in selenium 4.0, driver manager is integrated and will download necessary drivers
+            driver = new FirefoxDriver(firefoxOptions);
             log.info("firefox driver created");
         }
 
         // Initialize driver object to CHROME BROWSER
         else if (browser.equalsIgnoreCase("CHROME")) {
-
+            //Chrome Options
             chromeOptions = new ChromeOptions();
-            //chromeOptions.setAcceptInsecureCerts(true);
-            //chromeOptions.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.ACCEPT);
+            chromeOptions.setAcceptInsecureCerts(true);
+            chromeOptions.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.ACCEPT);
+            chromeOptions.addArguments("start-maximized");
 
-            //Handling ssl cert issues with desired capabilities
-            DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-            capabilities.setCapability (CapabilityType.ACCEPT_SSL_CERTS, true);
-            chromeOptions.merge(capabilities);
-
-            // configuring driver based on operating system
-            if (Platform.getCurrent().toString().matches(".*?(mac|MAC).*?")) {
-                System.setProperty("webdriver.chrome.driver", GlobalConstants.MAC_CHROME_DRIVER_PATH);
-                System.setProperty(ChromeDriverService.CHROME_DRIVER_LOG_PROPERTY, "null");  // Disabling logs
-                chromeOptions.addArguments("--start-maximized");
-                chromeOptions.addArguments("--disable-notifications");
-            }
-
-            if (Platform.getCurrent().toString().matches(".*?(win|WIN).*?")) {
-                System.setProperty("webdriver.chrome.driver", GlobalConstants.WINDOWS_CHROME_DRIVER_PATH);
-                System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true");  // Disabling logs
-                log.info("Chrome driver created : WINDOWS OS");
-                chromeOptions.addArguments("--start-maximized");
-                chromeOptions.addArguments("--disable-notifications");
-
-                log.info("browser window maximised");
-            }
-
+            //Chrome driver - chrome driver path is not required in selenium 4.0, driver manager is integrated and will download necessary drivers
             driver = new ChromeDriver(chromeOptions);
             log.info("Chrome driver created : MAC OS");
         }
 
-        // Initialize driver object to IE
-        else if (browser.equalsIgnoreCase("IE")) {
-            System.setProperty("webdriver.ie.driver", GlobalConstants.MICROSOFT_WEB_DRIVER_DRIVER_PATH);
-            driver = new InternetExplorerDriver();
-        }
-
         // Initialize driver object to EDGE
         else if (browser.equalsIgnoreCase("EDGE")) {
-
-            //Handling SSL cert issue
+            //Edge Options
             EdgeOptions edgeOptions = new EdgeOptions();
-            DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-            edgeOptions.merge(capabilities);
+            edgeOptions.addArguments("--start-maximized");
 
-            System.setProperty("webdriver.ie.driver", GlobalConstants.MICROSOFT_WEB_DRIVER_DRIVER_PATH);
-            System.setProperty(EdgeDriverService.EDGE_DRIVER_LOG_PROPERTY,"null"); // Disabling logs
+            //Edge driver - driver path is not required in selenium 4.0, driver manager is integrated and will download necessary drivers
             driver = new EdgeDriver(edgeOptions);
         }
 
-        //  TODO  - Initialize driver object to SAFARI
         else if (browser.equalsIgnoreCase("SAFARI")) {
-            driver = new SafariDriver();
+            //  TODO  the safaridriver is installed with the Operating System.To enable automation on Safari, run the following command from the terminal
+            //   safaridriver --enable
+
+            //Safari Options
+            SafariOptions safariOptions = new SafariOptions();
+
+            //Safari Driver
+            driver = new SafariDriver(safariOptions);
         }
 
         // Launch URL and Maximize window
         log.info("launching browser");
 
         driver.get(url);
-        //driver.get("javascript:document.getElementById('overridelink').click();");     //handle certificate issues
-        log.info("navigated to url-"+url);
+        log.info("navigated to url-" + url);
         driver.manage().window().fullscreen();
         log.info("browser window - FULL SCREEN MODE");
         log.info("Created Web Driver");
@@ -473,25 +442,25 @@ public class SeleniumUtil {
 
     // WAIT FOR MAX TIME 15 SECS TILL THE ELEMENT IS CLICKABLE - DISPLAYED AND ENABLED
     public WebElement wait_until_ElementIs_Clickable(WebDriver driver, By locator) {
-        wait = new WebDriverWait(driver, 15);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 
     // WAIT FOR MAX TIME 15 SECS TILL THE ELEMENT IS VISIBLE
     public WebElement wait_until_ElementIs_Visible(WebDriver driver, By locator) {
-        wait = new WebDriverWait(driver, 15);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
     // WAIT FOR MAX TIME 15 SECS TILL THE ELEMENT IS PRESENT
     public WebElement wait_until_ElementIs_Present(WebDriver driver, By locator) {
-        wait = new WebDriverWait(driver, 15);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     }
 
     // WAIT FOR MAX TIME 15 SECS TILL SELENIUM FINDS 2 WINDOWS
     public void wait_until_Two_Windows_Are_Available(WebDriver driver) {
-        wait = new WebDriverWait(driver, 15);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         wait.until(ExpectedConditions.numberOfWindowsToBe(2));
     }
 
@@ -499,30 +468,30 @@ public class SeleniumUtil {
 
     // WAIT FOR MAX TIME 15 SECS TILL THE ELEMENT IS PRESENT
     public List<WebElement> wait_until_ElementsAre_Present(WebDriver driver, By locator) {
-        wait = new WebDriverWait(driver, 15);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         return wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
     }
 
     // WAIT FOR MAX TIME 15 SECS TILL THE ELEMENT IS VISIBLE
     public List<WebElement> wait_until_ElementsAre_Visible(WebDriver driver, By locator) {
-        wait = new WebDriverWait(driver, 15);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         return wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
     }
 
     // ******** EXPLICIT WAITS ON PAGE TITLE,URL AND ELEMENT_NOT_PRESENT ************//
 
     public boolean wait_until_TitleContains(WebDriver driver, String keyword) {
-        wait = new WebDriverWait(driver, 10);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         return wait.until(ExpectedConditions.titleContains(keyword));
     }
 
     public boolean wait_until_URL_Matches(WebDriver driver, String regex) {
-        wait = new WebDriverWait(driver, 10);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         return wait.until(ExpectedConditions.urlMatches(regex));
     }
 
     public boolean IS_Element_NotPresent(WebDriver driver, By locator) {
-        wait = new WebDriverWait(driver, 10);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         return wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
     }
 

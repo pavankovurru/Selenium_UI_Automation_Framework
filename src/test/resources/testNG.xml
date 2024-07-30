@@ -4,18 +4,10 @@
 
     <!--SUITE LEVEL PARAMETERS-->
 
-    <parameter name="url" value="https://www.google.com"/>
-    <parameter name="browser" value="firefox"/>
+    <parameter name="url" value="https://www.apple.com"/>
+    <parameter name="browser" value="SAFARI"/>
     <parameter name="browserVersion" value="latest"/>
-    <parameter name="targetRun" value="local"/>
-
-    <!--runOn options : local or browserstack-->
-
-    <listeners>
-        <listener class-name="com.company.project.utilities.ReRunFailedTestsListener"/>
-        <listener class-name="com.company.project.utilities.TestCountResetterAfterReRun"/>
-        <listener class-name="com.company.project.utilities.TestListener"/>
-    </listeners>
+    <parameter name="targetRun" value="local"/>      <!--runOn options : local or browserstack-->
 
     <test name="UI Tests"  >
         <classes>
