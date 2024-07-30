@@ -4,19 +4,16 @@
 ## FEATURES
 
 ```
-Compatible with Major Latest Selenium Release - 3
-Screen Shot gets created automatically on failure with the name of the test.
-A Failed Test case re-runs without altering test case count.   
-This was implemented using Test-NG Listeners to handle rare UI failures.
+Compatible with Major Latest Selenium Release - 4
 ```
 
 ##  FRAME WORK STACK 
 
 ```
-1. Selenium 3.11.0
-2. LOG4J 2.11.0
+1. Selenium 4.20.0
+2. LOG4J 2.23.1
 3. TestNG 6.14.3
-4. Gradle
+4. Gradle 8.5
 ```
 
 
@@ -35,6 +32,3 @@ This was implemented using Test-NG Listeners to handle rare UI failures.
 
                                    `TESTS --> TESTNG XML --> GRADLE TASK --> CI`
 
-## PROJECT STRUCTURE
-
-![alt tag](https://github.com/pavankovurru/Selenium_UI_Automation_Framework/blob/master/ProjectStructure.png)
