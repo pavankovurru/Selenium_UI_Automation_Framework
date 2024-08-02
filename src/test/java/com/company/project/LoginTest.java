@@ -5,6 +5,7 @@ import com.company.project.utilities.SeleniumUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -39,12 +40,13 @@ public class LoginTest {
     lp = new LoginPage(driver);
   }
 
-  @Test(priority = 1)
-  public void validateLogin() {
-   lp.logIn();
+  @Test(priority = 1, retryAnalyzer = RetryLogic.class)
+  public void validatePageTitle() {
+   String title = lp.getTitle();
+   Assert.assertEquals(title,"Apple");
   }
 
-  @AfterMethod
+  @AfterMethod(alwaysRun = true)
   public void logout() {
     log.info("Selenium Web Driver session terminated");
     driver.quit();

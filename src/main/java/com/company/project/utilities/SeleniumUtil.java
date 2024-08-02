@@ -93,7 +93,7 @@ public class SeleniumUtil {
         driver.get(url);
         log.info("Created Web Driver");
         log.info("navigated to url -" + url);
-        // driver.manage().window().maximize();
+        driver.manage().window().maximize();
         log.info("browser window maximised");
 
         return driver;
