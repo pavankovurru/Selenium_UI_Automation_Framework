@@ -2,16 +2,21 @@
 
 <suite name="TEST SUITE">
 
-    <!--SUITE LEVEL PARAMETERS-->
+    <!--listeners-->
+    <listeners>
+        <listener class-name="com.company.project.utilities.retry.RetryListener"/>
+    </listeners>
 
+    <!--SUITE LEVEL PARAMETERS-->
     <parameter name="url" value="https://www.apple.com"/>
-    <parameter name="browser" value="SAFARI"/>
+    <parameter name="browser" value="chrome"/>
     <parameter name="browserVersion" value="latest"/>
     <parameter name="targetRun" value="local"/>      <!--runOn options : local or browserstack-->
 
-    <test name="UI Tests"  >
+    <!--Tests-->
+    <test name="UI Tests">
         <classes>
-            <class name="com.company.project.LoginTest" />
+            <class name="com.company.project.login.LoginTest"/>
         </classes>
     </test>
 

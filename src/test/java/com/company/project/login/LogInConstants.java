@@ -1,4 +1,4 @@
-package com.company.project.constants.global;
+package com.company.project.login;
 
 /** Created by pavankovurru on 12/1/16. */
 public class LogInConstants {

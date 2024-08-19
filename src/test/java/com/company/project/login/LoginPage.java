@@ -1,4 +1,4 @@
-package com.company.project.pages.global;
+package com.company.project.login;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,7 +13,7 @@ public class LoginPage {
     this.driver = driver;
   }
 
-  public String logIn() {
+  public String getTitle() {
     log.info("PAGE TITLE BEFORE USER LOGIN-" + driver.getTitle());
     return driver.getTitle();
   }

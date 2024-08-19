@@ -1,7 +1,5 @@
-package com.company.project;
-
-import com.company.project.pages.global.LoginPage;
-import com.company.project.utilities.SeleniumUtil;
+package com.company.project.login;
+import com.company.project.utilities.selenium.SeleniumUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -34,21 +32,29 @@ public class LoginTest {
       log.info("Invalid `runOn` value present in testNG.xml");
       throw new SkipException("Skipping tests");
     }
-
     log.info("Selenium Web Driver session initiated on -" + targetRun);
 
+    //Page Objects
     lp = new LoginPage(driver);
   }
 
-  @Test(priority = 1, retryAnalyzer = RetryLogic.class)
+  @Test(priority = 1)
   public void validatePageTitle() {
    String title = lp.getTitle();
    Assert.assertEquals(title,"Apple");
   }
 
+  @Test(priority = 2)
+  public void validatePageTitleFailure() {
+    String title = lp.getTitle();
+    Assert.assertEquals(title,"NotApple");
+  }
+
   @AfterMethod(alwaysRun = true)
   public void logout() {
-    log.info("Selenium Web Driver session terminated");
-    driver.quit();
+    if (driver != null) {
+      driver.quit();
+      log.info("Selenium Web Driver session terminated");
+    }
   }
 }

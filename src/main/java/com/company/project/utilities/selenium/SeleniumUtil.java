@@ -1,4 +1,4 @@
-package com.company.project.utilities;
+package com.company.project.utilities.selenium;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -140,8 +140,9 @@ public class SeleniumUtil {
         }
 
         else if (browser.equalsIgnoreCase("SAFARI")) {
-            //  TODO  the safaridriver is installed with the Operating System.To enable automation on Safari, run the following command from the terminal
+            //   TODO - safaridriver is installed with the Operating System.To enable automation on Safari, run the following command from the terminal
             //   safaridriver --enable
+            //   safari settings -> Developer -> Enable remote automation
 
             //Safari Options
             SafariOptions safariOptions = new SafariOptions();
