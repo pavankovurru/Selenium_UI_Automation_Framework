@@ -5,6 +5,7 @@
     <!--listeners-->
     <listeners>
         <listener class-name="com.company.project.utilities.retry.RetryListener"/>
+        <listener class-name="com.company.project.utilities.screenshot.ScreenshotListener"/>
     </listeners>
 
     <!--SUITE LEVEL PARAMETERS-->

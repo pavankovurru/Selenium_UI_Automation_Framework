@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 public class LoginTest {
 
   public static Logger log = LogManager.getLogger();
-  private WebDriver driver = null;
+  public WebDriver driver = null;
   private LoginPage lp;
   private SeleniumUtil seleniumUtil = null;
 
@@ -32,10 +32,11 @@ public class LoginTest {
       log.info("Invalid `runOn` value present in testNG.xml");
       throw new SkipException("Skipping tests");
     }
-    log.info("Selenium Web Driver session initiated on -" + targetRun);
+    log.info("Selenium Web Driver session initiated on - " + targetRun);
 
     //Page Objects
     lp = new LoginPage(driver);
+
   }
 
   @Test(priority = 1)

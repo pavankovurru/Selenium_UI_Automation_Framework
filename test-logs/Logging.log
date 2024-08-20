@@ -1,0 +1,16 @@
+2024-08-19 21:53:03 | [createDriver] | (SeleniumUtil.java:107) | Initiating driver on browser name -chrome
+2024-08-19 21:53:04 | [createDriver] | (SeleniumUtil.java:129) | Chrome driver created
+2024-08-19 21:53:04 | [createDriver] | (SeleniumUtil.java:157) | launching browser
+2024-08-19 21:53:04 | [createDriver] | (SeleniumUtil.java:160) | navigated to url - https://www.apple.com
+2024-08-19 21:53:05 | [createDriver] | (SeleniumUtil.java:162) | browser window - FULL SCREEN MODE
+2024-08-19 21:53:05 | [login] | (LoginTest.java:35) | Selenium Web Driver session initiated on - local
+2024-08-19 21:53:05 | [getTitle] | (LoginPage.java:17) | PAGE TITLE BEFORE USER LOGIN-Apple
+2024-08-19 21:53:05 | [logout] | (LoginTest.java:58) | Selenium Web Driver session terminated
+2024-08-19 21:53:05 | [createDriver] | (SeleniumUtil.java:107) | Initiating driver on browser name -chrome
+2024-08-19 21:53:06 | [createDriver] | (SeleniumUtil.java:129) | Chrome driver created
+2024-08-19 21:53:06 | [createDriver] | (SeleniumUtil.java:157) | launching browser
+2024-08-19 21:53:06 | [createDriver] | (SeleniumUtil.java:160) | navigated to url - https://www.apple.com
+2024-08-19 21:53:07 | [createDriver] | (SeleniumUtil.java:162) | browser window - FULL SCREEN MODE
+2024-08-19 21:53:07 | [login] | (LoginTest.java:35) | Selenium Web Driver session initiated on - local
+2024-08-19 21:53:07 | [getTitle] | (LoginPage.java:17) | PAGE TITLE BEFORE USER LOGIN-Apple
+2024-08-19 21:53:08 | [logout] | (LoginTest.java:58) | Selenium Web Driver session terminated

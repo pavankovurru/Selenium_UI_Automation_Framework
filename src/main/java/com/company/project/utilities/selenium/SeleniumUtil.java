@@ -126,7 +126,7 @@ public class SeleniumUtil {
 
             //Chrome driver - chrome driver path is not required in selenium 4.0, driver manager is integrated and will download necessary drivers
             driver = new ChromeDriver(chromeOptions);
-            log.info("Chrome driver created : MAC OS");
+            log.info("Chrome driver created");
         }
 
         // Initialize driver object to EDGE
@@ -137,6 +137,7 @@ public class SeleniumUtil {
 
             //Edge driver - driver path is not required in selenium 4.0, driver manager is integrated and will download necessary drivers
             driver = new EdgeDriver(edgeOptions);
+            log.info("Edge driver created");
         }
 
         else if (browser.equalsIgnoreCase("SAFARI")) {
@@ -149,16 +150,16 @@ public class SeleniumUtil {
 
             //Safari Driver
             driver = new SafariDriver(safariOptions);
+            log.info("Safari driver created");
         }
 
         // Launch URL and Maximize window
         log.info("launching browser");
 
         driver.get(url);
-        log.info("navigated to url-" + url);
+        log.info("navigated to url - " + url);
         driver.manage().window().fullscreen();
         log.info("browser window - FULL SCREEN MODE");
-        log.info("Created Web Driver");
         return driver;
     }
 
@@ -213,7 +214,7 @@ public class SeleniumUtil {
     public void hover(WebDriver driver, By locator) {
         Actions action = new Actions(driver);
         action.moveToElement(wait_until_ElementIs_Visible(driver, locator)).build().perform();
-        log.info("Hover action done on element -" + locator);
+        log.info("Hover action done on element - " + locator);
         waitForPageToLoad(driver);
     }
 
@@ -221,7 +222,7 @@ public class SeleniumUtil {
     public void hoverAndClick(WebDriver driver, By locator) {
         Actions action = new Actions(driver);
         action.moveToElement(wait_until_ElementIs_Visible(driver, locator)).click().build().perform();
-        log.info("click action on -" + locator + " performed");
+        log.info("click action on - " + locator + " performed");
         waitForPageToLoad(driver);
     }
 
@@ -230,7 +231,7 @@ public class SeleniumUtil {
         WebElement el = wait_until_ElementIs_Visible(driver, locator);
         action.moveToElement(el).click().build().perform();
         el.clear();
-        log.info("click and clear actions on -" + el + " performed");
+        log.info("click and clear actions on - " + el + " performed");
         waitForPageToLoad(driver);
     }
 
@@ -378,7 +379,7 @@ public class SeleniumUtil {
             for (String winHandle : driver.getWindowHandles()) {
                 if (!winHandle.equals(parentHandle)) {
                     driver.switchTo().window(winHandle);
-                    log.info("Switching to Child Window handle");
+                    log.info("Switching to child window handle");
                 }
                 driver.manage().window().maximize();
             }
