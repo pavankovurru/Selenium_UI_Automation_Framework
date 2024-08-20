@@ -17,7 +17,7 @@ Compatible with Major Latest Selenium Release - 4
 ```
 
 
-##  IMPORTANT FILES  
+## IMPORTANT FILES  
 
 1) `src/test/resources/testNG.xml` -- All Environment related data goes here including `url` , `browser` , `browser version` & `targetRun`
    `targetRun` - can be `local or  browserStack`, browser version is ignored if `targetRun=local`
@@ -30,5 +30,5 @@ Compatible with Major Latest Selenium Release - 4
 
 `NOTE : ALL OTHER ENVIRONMENT RELATED DETAILS SHOULD BE IN TESTNG XML's so that tests can run in any environment without any code changes`
 
-                                   `TESTS --> TESTNG XML --> GRADLE TASK --> CI`
+                                   `CI --> GRADLE TASK --> TESTNG XML --> TESTS`
 

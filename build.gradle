@@ -9,7 +9,7 @@ repositories {
 }
 
 dependencies {
-    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.20.0'
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.23.1'
     implementation group: 'org.seleniumhq.selenium', name: 'selenium-server', version: '3.141.59'
     implementation group: 'org.testng', name: 'testng', version: '7.10.2'
     implementation 'commons-io:commons-io:2.13.0'
