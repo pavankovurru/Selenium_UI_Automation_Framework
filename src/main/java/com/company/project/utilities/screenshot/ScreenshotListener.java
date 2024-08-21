@@ -41,7 +41,7 @@ public class ScreenshotListener implements ITestListener {
                 try {
                     // Adjust the path if needed, ensure it's relative to the TestNG report output directory
                     String dateName = new SimpleDateFormat("yyyy/MM/dd/hh:mm:ss").format(new Date());
-                    String screenshotPath = System.getProperty("user.dir") + "/test-screenshots/" + dateName + "-" +result.getName() + ".png";
+                    String screenshotPath = System.getProperty("user.dir") + File.separator + "test-screenshots" + File.separator +dateName + "-" +result.getName() + ".png";
                     FileUtils.copyFile(screenshot, new File(screenshotPath));
 
                     // Attach the screenshot to the TestNG report
